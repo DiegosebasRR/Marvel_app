@@ -1,18 +1,20 @@
 import logo from "../assets/logo.png";
 import { Form, Outlet, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { getCharacters } from "../MarvelApi";
-import { createHeroe } from "../heroes";
+import useHero from "../hooks/useHero";
 
 const Search = () => {
+  const heroes = useHero((state) => state.heroes);
+  const updateHeroes = useHero((state) => state.updateHeroes);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const handleSearch = () => {
     getCharacters(searchValue)
       .then((response) => {
-        createHeroe(response);
-        const id = response[0].id;
-        navigate(`/`);
+        const id = `${response[0].id}`;
+        updateHeroes([...heroes, { id, response }]);
+        navigate(`heroe/${id}`);
       })
       .catch((error) => {
         console.error(error);

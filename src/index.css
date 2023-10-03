@@ -38,11 +38,12 @@ header {
   outline: none;
   width: 500px;
   height: 40px;
-  transition: width 0.3s ease;
+  transition: all 0.3s;
+  margin: 0 20px 0 20px;
 }
 
 .search-container button[type="submit"] {
-  margin-left: 10px;
+  margin-left: 20px;
   height: 65px;
   width: 65px;
   background-color: #000000; /* Negro */
@@ -52,15 +53,16 @@ header {
   border-radius: 65px;
   outline: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .search-container input[type="text"]:focus {
-  width: 600px;
+  transform: scale(1.1);
 }
 
 .search-container button[type="submit"]:hover {
   background-color: #e23641; /* Rojo oscuro */
+  transform: scale(1.1);
 }
 /**/
 .container {
@@ -206,14 +208,18 @@ p {
   right: 50px;
   background-color: #ed1d24;
   color: #fff;
+  font-weight: bold;
+  font-size: 16px;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 12px 18px;
+  border-radius: 24px;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .btnEliminar:hover {
   background-color: #cc0000;
+  transform: scale(1.1);
 }
 
 /**/

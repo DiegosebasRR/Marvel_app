@@ -1,20 +1,23 @@
-import { Form, useLoaderData, useFetcher } from "react-router-dom";
-import { getHeroe } from "../heroes";
-import { deleteHeroe } from "../heroes";
-
-export async function loader({ params }) {
-  const heroe = await getHeroe(params.heroeId);
+import { Form } from "react-router-dom";
+import useHero from "../hooks/useHero";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+const Heroe = () => {
+  let { heroeId } = useParams();
+  const heroes = useHero((state) => state.heroes);
+  const updateHeroes = useHero((state) => state.updateHeroes);
+  const heroe = heroes.find((heroe) => heroe.id === heroeId);
+  const navigate = useNavigate();
   if (!heroe) {
     throw new Response("", {
       status: 404,
       statusText: "Not Found",
     });
   }
-  return { heroe };
-}
-
-const Heroe = () => {
-  const { heroe } = useLoaderData();
+  const deletee = () => {
+    updateHeroes(heroes.filter((hero) => hero.id !== heroeId));
+    navigate(`/`);
+  };
   return (
     <div className="right-section">
       <Form
@@ -26,7 +29,7 @@ const Heroe = () => {
           }
         }}
       >
-        <button className="btnEliminar" type="submit">
+        <button className="btnEliminar" onClick={deletee} type="submit">
           Delete
         </button>
       </Form>

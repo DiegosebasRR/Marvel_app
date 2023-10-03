@@ -1,12 +1,11 @@
-import { Outlet, Link, useLoaderData } from "react-router-dom";
-import { getHeroes } from "../heroes";
-export async function loader() {
-  const heroes = await getHeroes();
-  return { heroes };
-}
+import { Outlet, Link } from "react-router-dom";
+
+import useHero from "../hooks/useHero";
 
 const Historial = () => {
-  const { heroes } = useLoaderData();
+  const heroes = useHero((state) => state.heroes);
+  console.log(heroes);
+
   return (
     <div className="container">
       <div className="left-section">
